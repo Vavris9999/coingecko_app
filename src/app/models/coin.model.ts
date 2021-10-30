@@ -4,5 +4,6 @@ export interface Coin{
     name: string;
     image: string;
     current_price: DoubleRange;
-    
+    market_cap: number;
+    market_cap_rank: number;
 }

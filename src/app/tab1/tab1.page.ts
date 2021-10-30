@@ -11,16 +11,16 @@ export class Tab1Page {
 
   coins: Coin[] = [];
   coins$: Observable<Coin[]>;
-
+  selected_curr: string = "usd";
   constructor(
     private apiService:ApiService
   ) {
-    this.coins$ =  this.apiService.getCoins$();
-    this.apiService.getCoins$().subscribe(data =>{
-      console.log(data);
-      this.coins = data;
-    });
+    this.coins$ =  this.apiService.getCoins$(this.selected_curr)
 
   }
+  curr_changed(event){
+    this.coins$ =  this.apiService.getCoins$(event.target.value)
+  }
+ 
 
 }
