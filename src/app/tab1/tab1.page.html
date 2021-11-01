@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Coins list
+    <ion-title class="ion-text-center">
+      Coins
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -25,10 +25,9 @@
         <ion-label>Rank</ion-label>
         <ion-avatar style="margin-left:10px"></ion-avatar>
         <ion-label>Coin</ion-label>
-    
         <ion-label>Price</ion-label>
       </ion-item>
-    <ion-item *ngFor="let coin of coins$| async | filter:searchTerm">
+    <ion-item *ngFor="let coin of coins$| async | filter:searchTerm" [routerLink]="['/coin', coin.id]">
       <ion-label>{{coin.market_cap_rank}}</ion-label>   
       <ion-avatar style="margin-right:10px;">
         <img src="{{coin.image}}">
@@ -36,7 +35,6 @@
       <ion-label class="ion-text-wrap">{{coin.name}}</ion-label>      
       <ion-label class="ion-text-wrap">{{selected_curr}} {{coin.current_price}}</ion-label>   
     </ion-item>
-    
   </ion-list>
 
 

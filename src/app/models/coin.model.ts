@@ -7,3 +7,12 @@ export interface Coin{
     market_cap: number;
     market_cap_rank: number;
 }
+export interface CoinDetail{
+    id: string;
+    description: string;
+    categories: string;
+    name: string;
+    symbol: string;
+    image: string;
+    links: string;
+}

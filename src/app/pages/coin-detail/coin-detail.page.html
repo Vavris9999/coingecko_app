@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title  *ngIf="coin$ | async; let coin" >
+     {{coin.name}} (<span style="text-transform: uppercase;">{{coin.symbol}}</span>)
+  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div *ngIf="coin$ | async; let coin" class="ion-padding">
+
+  <h3>Categories</h3>
+<span>
+  {{coin.categories}}
+</span>
+<h3>Website</h3>
+<a href="{{coin.links['homepage'][0]}}">{{coin.links["homepage"][0]}}</a>
+<h3>Description</h3>
+<span>
+  {{coin.description["en"]}}
+</span>
+
+  </div>
+</ion-content>
