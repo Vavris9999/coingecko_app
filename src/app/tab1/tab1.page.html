@@ -11,31 +11,28 @@
   <ion-item>
     <ion-label>Currency</ion-label>
     <ion-select value="usd" okText="Select" cancelText="Dismiss" 
-    [(ngModel)]="selected_curr" (ionChange)="curr_changed($event)">
+    [(ngModel)]="selected_curr" (ionChange)="curr_changed()">
       <ion-select-option value="usd">USD</ion-select-option>
       <ion-select-option value="eur">EUR</ion-select-option>
       <ion-select-option value="czk">CZK</ion-select-option>
     </ion-select>
     </ion-item>
-
  
   <ion-searchbar [(ngModel)]="searchTerm" animated></ion-searchbar>
     <ion-list>
-      <ion-item>
-        <ion-label>Rank</ion-label>
-        <ion-avatar style="margin-left:10px"></ion-avatar>
-        <ion-label>Coin</ion-label>
-        <ion-label>Price</ion-label>
-      </ion-item>
-    <ion-item *ngFor="let coin of coins$| async | filter:searchTerm" [routerLink]="['/coin', coin.id]">
-      <ion-label>{{coin.market_cap_rank}}</ion-label>   
-      <ion-avatar style="margin-right:10px;">
+    <ion-item *ngFor="let coin of coins$| async | filter:searchTerm" >
+      <div *ngFor="let checked of checkedCoins" >
+        <ion-checkbox *ngIf="checked === coin.name" style="margin-right:25px" color="primary" (ionChange)="favouriteCrypto(coin.name,$event)" Checked></ion-checkbox>
+      </div>
+      <div *ngFor="let unChecked of unCheckedCoins" >
+        <ion-checkbox *ngIf="unChecked === coin.name" style="margin-right:25px" color="primary" (ionChange)="favouriteCrypto(coin.name,$event)"></ion-checkbox>
+      </div>
+      <ion-label style="z-index: 10;padding: 11px 0px 10px;margin:0px;" [routerLink]="['/coin', coin.id]" stacked>{{coin.market_cap_rank}}</ion-label>   
+      <ion-avatar [routerLink]="['/coin', coin.id]" style="margin-right:10px;z-index: 10;">
         <img src="{{coin.image}}">
       </ion-avatar>
-      <ion-label class="ion-text-wrap">{{coin.name}}</ion-label>      
-      <ion-label class="ion-text-wrap">{{selected_curr}} {{coin.current_price}}</ion-label>   
+      <ion-label style="z-index: 10; padding: 11px 0px 10px;margin:0px;" [routerLink]="['/coin', coin.id]" class="ion-text-wrap">{{coin.name}}</ion-label>      
+      <ion-label style="z-index: 10; padding: 11px 0px 10px;margin:0px;" [routerLink]="['/coin', coin.id]" class="ion-text-wrap">{{selected_curr}} {{coin.current_price}}</ion-label>   
     </ion-item>
   </ion-list>
-
-
 </ion-content>

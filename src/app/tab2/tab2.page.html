@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Exchanges
+      Favourite coins
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,7 +11,21 @@
     <ion-toolbar>
       <ion-title size="large"></ion-title>
     </ion-toolbar>
+  
   </ion-header>
+  
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-list>
+    <ion-refresher slot ="fixed" disabled="false" (ionRefresh)="doRefresh($event)" pullFactor="0.5" pullMin="100" pullMax="200">  
+    </ion-refresher> 
+    <ion-item *ngFor="let coin of favouriteCoinsValues" >
+      <ion-checkbox style="margin-right:25px" color="primary" (ionChange)="favouriteCrypto(coin.name,$event)" Checked></ion-checkbox>
+      <ion-label style="z-index: 10;padding: 11px 0px 10px;margin:0px;" [routerLink]="['/coin', coin.id]" stacked>{{coin.rank}}</ion-label>   
+      <ion-avatar [routerLink]="['/coin', coin.id]" style="margin-right:10px;z-index:10;">
+        <img src="{{coin.image}}">
+      </ion-avatar>
+      <ion-label style="z-index: 10;padding: 11px 0px 10px;margin:0px;" [routerLink]="['/coin', coin.id]" class="ion-text-wrap">{{coin.name}}</ion-label>      
+      <ion-label style="z-index: 10;padding: 11px 0px 10px;margin:0px;" [routerLink]="['/coin', coin.id]" class="ion-text-wrap">{{selected_curr}} {{coin.price}}</ion-label>   
+    </ion-item>
+  </ion-list>
 </ion-content>
