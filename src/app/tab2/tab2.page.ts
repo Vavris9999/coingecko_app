@@ -28,8 +28,6 @@ export class Tab2Page {
   constructor(private apiService:ApiService,
     private storageService:StorageService) {
       this.load_value();
-
-     
   }
   doRefresh(event) {  
     this.load_value();

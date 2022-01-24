@@ -20,6 +20,8 @@
  
   <ion-searchbar [(ngModel)]="searchTerm" animated></ion-searchbar>
     <ion-list>
+      <ion-refresher slot ="fixed" disabled="false" (ionRefresh)="doRefresh($event)" pullFactor="0.5" pullMin="100" pullMax="200">  
+      </ion-refresher> 
     <ion-item *ngFor="let coin of coins$| async | filter:searchTerm" >
       <div *ngFor="let checked of checkedCoins" >
         <ion-checkbox *ngIf="checked === coin.name" style="margin-right:25px" color="primary" (ionChange)="favouriteCrypto(coin.name,$event)" Checked></ion-checkbox>

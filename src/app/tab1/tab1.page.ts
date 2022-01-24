@@ -19,8 +19,16 @@ export class Tab1Page {
     private apiService:ApiService,
     private storageService:StorageService
   ) {
+    
     this.load_value();
   }
+
+  doRefresh(event) {  
+    this.load_value();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  } 
 
   async favouriteCrypto(name:string,e){
     if(e.detail.checked==true){
@@ -30,13 +38,14 @@ export class Tab1Page {
     }
   }
 
-  curr_changed(){
+  async curr_changed(){
+    await this.storageService.changeCurr(this.selected_curr);
     this.load_value(); 
-    this.storageService.changeCurr(this.selected_curr);
+  
   }
 
   async load_value(){
-    let result: string = await this.storageService.getCurr()[0];
+    let result = await this.storageService.getCurr();
     if(result){
       this.selected_curr=result;
     }

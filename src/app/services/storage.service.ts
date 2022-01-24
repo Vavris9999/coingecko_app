@@ -6,12 +6,11 @@ const CRYPTO_KEY = 'crypto';
   providedIn: 'root'
 })
 
-
 export class StorageService { 
   constructor(private storage: Storage) {
   }
-  changeCurr(item :string):Promise<any>{
-       return this.storage.set(CURR_KEY,[item]);
+  changeCurr(item :string):Promise<string>{
+       return this.storage.set(CURR_KEY,item);
   
   }
   getCurr(){
